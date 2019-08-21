@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "this" {
       "workmail:Get*",
       "athena:GetQueryResults*",
     ]
-    not_resources = s3_bucket_paths_to_allow
+    not_resources = var.s3_bucket_paths_to_allow
   }
   statement {
     sid = "DenyReadOnlySecrets"
