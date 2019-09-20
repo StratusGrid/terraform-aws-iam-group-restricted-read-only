@@ -7,7 +7,7 @@ This is meant to be used as a one and done solution for people with a single AWS
 ```
 module "iam_group_restricted_read_only" {
   source  = "GenesisFunction/iam-group-restricted-read-only/aws"
-  version = "1.0.0"
+  version = "1.0.1"
   # source  = "github.com/GenesisFunction/terraform-aws-iam-group-restricted-read-only"
 
   group_name = "${name_prefix}-restricted-read-only"
