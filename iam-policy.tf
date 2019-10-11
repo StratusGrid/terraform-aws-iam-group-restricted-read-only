@@ -16,6 +16,8 @@ data "aws_iam_policy_document" "this" {
     effect = "Deny"
     actions = [
       "secretsmanager:GetSecretValue",
+      "ssm:GetParameter*",
+      "ecr:GetAuthorizationToken",
       "ec2:GetPasswordData",
       "redshift:GetClusterCredentials",
       "cognito-identity:GetCredentialsForIdentity",
