@@ -24,3 +24,4 @@ module "iam_group_restricted_read_only" {
 ### Using different policies
 To use this as a template for a different set of permissions, delete iam-read-only-policy.tf, change the inputs, readme, and policy document/description in iam-policy.tf
 
+NOTE - The MFA restrictions come from the DENY on the user self service policy. If that is removed, you should make two of the restricted-admin(or your replacement) policies, make one be used in the role and not have the BOOL MFA conditions, and have one be for the direct group attachment and have the conditions.
