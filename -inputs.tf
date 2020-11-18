@@ -18,7 +18,7 @@ variable "input_tags" {
   description = "Map of tags to apply to resources"
   type        = map(string)
   default = {
-    Developer   = "GenesisFunction"
+    Developer   = "StratusGrid"
     Provisioner = "Terraform"
   }
 }
