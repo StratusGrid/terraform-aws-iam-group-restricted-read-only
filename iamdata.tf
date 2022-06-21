@@ -126,3 +126,37 @@ data "aws_iam_policy_document" "role_assumption" {
     }
   }
 }
+
+data "aws_iam_policy_document" "deny_data_retrieval" {
+  statement {
+    sid = "DenyReadOnlyDataRetrieval"
+    effect = "Deny"
+    actions = [
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:GetObjectVersionForReplication",
+      "lambda:GetFunction",
+      "workdocs:Get*",
+      "workmail:Get*",
+      "athena:GetQueryResults*",
+    ]
+    not_resources = var.s3_bucket_paths_to_allow
+  }
+  statement {
+    sid = "DenyReadOnlySecrets"
+    effect = "Deny"
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "ssm:GetParameter*",
+      "ecr:GetAuthorizationToken",
+      "ec2:GetPasswordData",
+      "redshift:GetClusterCredentials",
+      "cognito-identity:GetCredentialsForIdentity",
+      "cognito-identity:GetId",
+      "cognito-identity:GetOpenIdToken",
+    ]
+    resources = [
+      "*",
+    ]
+  }
+}
