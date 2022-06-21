@@ -28,8 +28,8 @@ data "aws_iam_policy_document" "user_self_service_policy" {
     effect = "Allow"
 
     resources = [
-       "arn:aws:iam::*:user/$${aws:username}",
-        "arn:aws:iam::*:mfa/$${aws:username}"
+      "arn:aws:iam::*:user/$${aws:username}",
+      "arn:aws:iam::*:mfa/$${aws:username}"
     ]
   }
 
