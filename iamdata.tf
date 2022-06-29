@@ -113,7 +113,7 @@ data "aws_iam_policy_document" "role_assumption" {
     effect = "Allow"
 
     resources = [
-      "${aws_iam_role.this.arn}"
+      aws_iam_role.this.arn
     ]
 
     condition {
