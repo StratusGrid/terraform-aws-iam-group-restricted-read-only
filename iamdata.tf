@@ -1,3 +1,4 @@
+#tfsec:ignore:aws-iam-no-policy-wildcards
 data "aws_iam_policy_document" "user_self_service_policy" {
   statement {
     sid = "ListUsersAccessWithoutMFA"
@@ -17,12 +18,12 @@ data "aws_iam_policy_document" "user_self_service_policy" {
     sid = "SelfServiceAccessWithoutMFA"
 
     actions = [
-        "iam:List*",
-        "iam:GetUser",
-        "iam:GetAccountPasswordPolicy",
-        "iam:ChangePassword",
-        "iam:CreateVirtualMFADevice",
-        "iam:EnableMFADevice"
+      "iam:List*",
+      "iam:GetUser",
+      "iam:GetAccountPasswordPolicy",
+      "iam:ChangePassword",
+      "iam:CreateVirtualMFADevice",
+      "iam:EnableMFADevice"
     ]
 
     effect = "Allow"
@@ -37,22 +38,22 @@ data "aws_iam_policy_document" "user_self_service_policy" {
     sid = "SelfServiceAccessWithMFA"
 
     actions = [
-        "iam:Get*",
-        "iam:DeleteSSHPublicKey",
-        "iam:GetSSHPublicKey",
-        "iam:ListSSHPublicKeys",
-        "iam:UpdateSSHPublicKey",
-        "iam:UploadSSHPublicKey",
-        "iam:CreateAccessKey",
-        "iam:DeleteAccessKey",
-        "iam:UpdateAccessKey",
-        "iam:DeleteVirtualMFADevice",
-        "iam:DeactivateMFADevice",
-        "iam:ResyncMFADevice",
-        "iam:UploadSigningCertificate",
-        "iam:UpdateSigningCertificate",
-        "iam:DeleteSigningCertificate",
-        "iam:GenerateServiceLastAccessedDetails"
+      "iam:Get*",
+      "iam:DeleteSSHPublicKey",
+      "iam:GetSSHPublicKey",
+      "iam:ListSSHPublicKeys",
+      "iam:UpdateSSHPublicKey",
+      "iam:UploadSSHPublicKey",
+      "iam:CreateAccessKey",
+      "iam:DeleteAccessKey",
+      "iam:UpdateAccessKey",
+      "iam:DeleteVirtualMFADevice",
+      "iam:DeactivateMFADevice",
+      "iam:ResyncMFADevice",
+      "iam:UploadSigningCertificate",
+      "iam:UpdateSigningCertificate",
+      "iam:DeleteSigningCertificate",
+      "iam:GenerateServiceLastAccessedDetails"
     ]
 
     effect = "Allow"
@@ -76,19 +77,19 @@ data "aws_iam_policy_document" "user_self_service_policy" {
     sid = "DenyAllExceptListedIfNoMFA"
 
     not_actions = [
-        "iam:ListVirtualMFADevices",
-        "iam:List*",
-        "iam:GetUser",
-        "iam:GetAccountPasswordPolicy",
-        "iam:EnableMFADevice",
-        "iam:CreateVirtualMFADevice",
-        "iam:ChangePassword"
+      "iam:ListVirtualMFADevices",
+      "iam:List*",
+      "iam:GetUser",
+      "iam:GetAccountPasswordPolicy",
+      "iam:EnableMFADevice",
+      "iam:CreateVirtualMFADevice",
+      "iam:ChangePassword"
     ]
 
     effect = "Deny"
 
     resources = [
-        "*"
+      "*"
     ]
 
     condition {
@@ -107,7 +108,7 @@ data "aws_iam_policy_document" "role_assumption" {
     sid = "AssumeRole"
 
     actions = [
-        "sts:AssumeRole"
+      "sts:AssumeRole"
     ]
 
     effect = "Allow"
@@ -127,9 +128,10 @@ data "aws_iam_policy_document" "role_assumption" {
   }
 }
 
+#tflint-ignore: terraform_required_providers -- Ignore warning on version constraint
 data "aws_iam_policy_document" "deny_data_retrieval" {
   statement {
-    sid = "DenyReadOnlyDataRetrieval"
+    sid    = "DenyReadOnlyDataRetrieval"
     effect = "Deny"
     actions = [
       "s3:GetObject",
@@ -143,7 +145,7 @@ data "aws_iam_policy_document" "deny_data_retrieval" {
     not_resources = var.s3_bucket_paths_to_allow
   }
   statement {
-    sid = "DenyReadOnlySecrets"
+    sid    = "DenyReadOnlySecrets"
     effect = "Deny"
     actions = [
       "secretsmanager:GetSecretValue",

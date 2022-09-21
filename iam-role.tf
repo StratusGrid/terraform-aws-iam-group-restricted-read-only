@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "cross_account_assume_role_policy_mfa" {
     effect = "Allow"
 
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
         "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
       ]
