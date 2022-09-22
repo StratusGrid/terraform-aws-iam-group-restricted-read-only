@@ -1,0 +1,12 @@
+module "iam_group_restricted_read_only" {
+  source  = "github.com/StratusGrid/terraform-aws-iam-group-restricted-read-only"
+
+  group_name = "${name_prefix}-restricted-read-only"
+
+  s3_bucket_paths_to_allow = [
+    module.cloudtrail.s3_bucket_arn,
+    "${module.cloudtrail.s3_bucket_arn}/*"
+  ]
+
+  input_tags = merge(local.common_tags, {})
+}

@@ -1,0 +1,52 @@
+version: ""
+
+formatter: markdown table
+
+name: terraform-aws-iam-group-restricted-read-only
+
+content: |-
+  # terraform-aws-iam-group-restricted-read-only
+
+  GitHub: [StratusGrid/terraform-aws-iam-group-restricted-read-only](https://github.com/StratusGrid/terraform-aws-iam-group-restricted-read-only)
+
+  iam-group-restricted-read-only creates a group and associated policies/roles to be able to grant users a restricted read only policy (full read only minus deletion of getting bucket objects, downloading lambda code, etc.) in addition to user self service rights. The default policy requires MFA access for console, but not role assumption(though the role can be switched into), and requires role assumption for cli (best way to do MFA in cli).
+
+  This is meant to be used as a one and done solution for people with a single AWS account who want to have/enforce MFA access on their admins.
+
+  ## Examples
+
+  ```hcl
+  {{ include "examples/example1.tfnot" }}
+  ```
+  ---
+  ## Using different policies
+  
+  To use this as a template for a different set of permissions, delete iam-read-only-policy.tf, change the inputs, and policy document/description in iam-policy.tf
+  
+  ---
+  {{ .Requirements }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  ---
+
+  Note, manual changes to the README will be overwritten when the documentation is updated. To update the documentation, run `terraform-docs -c .config/.terraform-docs.yml`
+
+sections:
+  show:
+    - requirements
+    - resources
+    - inputs
+    - outputs
+
+sort:
+  enabled: true
+  by: name
+
+output:
+  file: README.md
+  mode: replace
