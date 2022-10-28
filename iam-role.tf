@@ -1,6 +1,6 @@
 resource "aws_iam_role" "this" {
   name               = "${var.group_name}-role"
-  tags               = local.common_tags
+  tags               = var.input_tags
   assume_role_policy = data.aws_iam_policy_document.cross_account_assume_role_policy_mfa.json
 }
 
